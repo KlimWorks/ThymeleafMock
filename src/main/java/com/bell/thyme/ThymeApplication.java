@@ -1,13 +1,14 @@
 package com.bell.thyme;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
 public class ThymeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ThymeApplication.class, args);
+
+	 SpringAppAnnotation.startApp();
+		// запускает спринговую часть приложения,хотя приложение
+		//и без него отлично стартует и корректно работает с аннотацией @SpringBootApplication
+		//но для понимания работы лучше заменить эту аннотацию ее эквивалентами,
+		//тогда спринговая часть не будет запускаться без вызова из main (сама по себе)
 	}
 
 }
