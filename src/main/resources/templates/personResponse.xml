@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+        <PersonInBlackList>
+            <FullName th:text="${requestPerson.getFullName}"></FullName>
+            <ListOfAddress>
+                <Address></Address>
+            </ListOfAddress>
+            <DULSeries th:text="${requestPerson.getDULSeries}"></DULSeries>
+            <DULNumber th:text="${requestPerson.getDULNumber}"></DULNumber>
+            <BlackList th:text="${requestPerson.getInBlackList}"></BlackList>
+        </PersonInBlackList>
