@@ -1,8 +1,8 @@
 package com.bell.thyme.controller;
 
+import com.bell.thyme.config.Delayer;
 import com.bell.thyme.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,9 +16,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 @RequestMapping("/")
 public class MainController {
 
-    @Value("${mock.firstDelay}")
-    private long delay;
-
     @Autowired
     SpringTemplateEngine springTemplateEngine;
 
@@ -28,13 +25,6 @@ public class MainController {
     public @ResponseBody String test(@RequestBody Person body) {
 
         long startTime = System.currentTimeMillis();
-
-          //имитация времени работы кода
-//        try {
-//            Thread.sleep((long) (Math.random()*5000));
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
 
         Person requestPerson = new Person(
                 body.getFullName(),
@@ -51,7 +41,7 @@ public class MainController {
 
         //задержка ответа от заглушки
         try {
-            Thread.sleep(delay - codeWorkingPeriod);
+            Thread.sleep(Delayer.getActualDelay() - codeWorkingPeriod);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -1,20 +1,43 @@
 package com.bell.thyme.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-public class Delayer {
+import javax.annotation.PostConstruct;
+
+@Component
+public class Delayer extends Thread {
 
     @Value("${mock.firstDelay}")
-    private long delay;
+    public long delayFromProperties;
 
     @Value("${mock.firstFrequency}")
     private long frequency;
 
-    public long getDelay(){
-        return delay;
+    public static long actualDelay;
+
+    @PostConstruct
+    public void init(){
+        actualDelay = delayFromProperties;
     }
-//    public static void setActualDelay(long anyDelay) {
-//        delay = anyDelay;
+
+//    @Override
+//    public void run() {
+//            while(true)   {
+//
+//            init();
+//
+//            try {
+//                Thread.sleep(frequency);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
 //    }
+
+    public static long getActualDelay(){
+        return actualDelay;
+    }
+
 
 }
