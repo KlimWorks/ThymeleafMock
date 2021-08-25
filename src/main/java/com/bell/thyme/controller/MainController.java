@@ -1,7 +1,7 @@
 package com.bell.thyme.controller;
 
-import com.bell.thyme.config.Delayer;
 import com.bell.thyme.model.Person;
+import org.example.Delayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
