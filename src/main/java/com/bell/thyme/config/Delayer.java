@@ -21,23 +21,31 @@ public class Delayer extends Thread {
         actualDelay = delayFromProperties;
     }
 
-//    @Override
-//    public void run() {
-//            while(true)   {
-//
-//            init();
-//
-//            try {
-//                Thread.sleep(frequency);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    @Override
+    public void run() {
 
+        while(Delayer.currentThread().isAlive())   {
+
+            init();
+
+            //нельзя ставить Thread.sleep внутрь цикла! Но Thread.wait - подойдет
+           frequencyDelayed();
+        }
+    }
+
+    public void frequencyDelayed() {
+        //надо вызывать метод wait из синхронизированного блока
+        synchronized (Thread.currentThread()) {
+            try {
+                Thread.currentThread().wait(frequency);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @PostConstruct
     public static long getActualDelay(){
         return actualDelay;
     }
-
-
 }
