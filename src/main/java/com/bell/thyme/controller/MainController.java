@@ -37,14 +37,7 @@ public class MainController {
         responseContext.setVariable("requestPerson", requestPerson);
         String responseContent = springTemplateEngine.process("personResponse", responseContext);
 
-        long codeWorkingPeriod = System.currentTimeMillis() - startTime;    //время работы кода в мс
-
-        //задержка ответа от заглушки
-        try {
-            Thread.sleep(Delayer.getActualDelay() - codeWorkingPeriod);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Delayer.getActualDelay(startTime);
 
         return responseContent;
     }
